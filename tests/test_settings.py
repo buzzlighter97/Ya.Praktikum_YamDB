@@ -3,7 +3,7 @@ from api_yamdb import settings
 
 class TestSettings:
 
-    def test_settings(self):
+    def test_dockerfile(self):
 
         assert not settings.DEBUG, 'Проверьте, что DEBUG в настройках Django выключен'
         assert settings.DATABASES['default']['ENGINE'] == 'django.db.backends.postgresql', \
