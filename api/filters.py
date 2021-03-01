@@ -10,19 +10,19 @@ class TitleFilterSet(rest_framework.FilterSet):
     field: name: contains filter
     """
 
-    year = rest_framework.NumberFilter(field_name='year')
-    genre = rest_framework.CharFilter(field_name='genre__slug')
-    category = rest_framework.CharFilter(field_name='category__slug')
+    year = rest_framework.NumberFilter(field_name="year")
+    genre = rest_framework.CharFilter(field_name="genre__slug")
+    category = rest_framework.CharFilter(field_name="category__slug")
     name = rest_framework.CharFilter(
-        field_name='name',
-        lookup_expr='contains',
+        field_name="name",
+        lookup_expr="contains",
     )
 
     class Meta:
         model = Title
         fields = (
-            'name',
-            'year',
-            'category',
-            'genre',
+            "name",
+            "year",
+            "category",
+            "genre",
         )

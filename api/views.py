@@ -39,9 +39,9 @@ def create_with_slug(self, serializer):
 
     if not self and serializer:
         raise Http404
-    if not serializer.initial_data.get('slug'):
+    if not serializer.initial_data.get("slug"):
         try:
-            name = serializer.initial_data['name']
+            name = serializer.initial_data["name"]
         except KeyError:
             raise ParseError
         slug = slugify(name)
@@ -53,7 +53,7 @@ def create_with_slug(self, serializer):
 def destroy_with_slug(self, request, **kwargs):
     """Allows you to delete models by the slug field."""
 
-    slug = kwargs.get('pk')
+    slug = kwargs.get("pk")
     if not slug:
         raise Http404
     instance = get_object_or_404(self.queryset, slug=slug)
@@ -87,7 +87,7 @@ class CategorieViewSet(ListCreateDestroyViewSet):
     queryset = Categorie.objects.all()
     serializer_class = CategorieSerializer
     filter_backends = (SearchFilter,)
-    search_fields = ('=name',)
+    search_fields = ("=name",)
 
     def perform_create(self, serializer):
         create_with_slug(self, serializer)
@@ -105,7 +105,7 @@ class GenreViewSet(ListCreateDestroyViewSet):
     queryset = Genre.objects.all()
     serializer_class = GenreSerializer
     filter_backends = (SearchFilter,)
-    search_fields = ('=name',)
+    search_fields = ("=name",)
 
     def perform_create(self, serializer):
         create_with_slug(self, serializer)
@@ -120,7 +120,7 @@ class GenreViewSet(ListCreateDestroyViewSet):
 class TitleViewSet(ModelViewSet):
     """ViewSet of the Title model."""
 
-    queryset = Title.objects.annotate(rating=Avg('reviews__score'))
+    queryset = Title.objects.annotate(rating=Avg("reviews__score"))
     serializer_class = TitleSerializer
     filter_backends = (DjangoFilterBackend,)
     filterset_class = TitleFilterSet
@@ -140,7 +140,7 @@ class ReviewViewSet(ModelViewSet):
     serializer_class = ReviewSerializer
 
     def get_title(self):
-        title_id = self.kwargs.get('title_id')
+        title_id = self.kwargs.get("title_id")
         return get_object_or_404(Title, id=title_id)
 
     def get_queryset(self):
@@ -160,8 +160,8 @@ class CommentViewSet(ModelViewSet):
     serializer_class = CommentSerializer
 
     def get_review(self):
-        title_id = self.kwargs.get('title_id')
-        review_id = self.kwargs.get('review_id')
+        title_id = self.kwargs.get("title_id")
+        review_id = self.kwargs.get("review_id")
         return get_object_or_404(Review, title__id=title_id, id=review_id)
 
     def get_queryset(self):

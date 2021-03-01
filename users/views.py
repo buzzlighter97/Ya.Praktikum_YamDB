@@ -27,21 +27,21 @@ class UserViewSet(ModelViewSet):
 
     queryset = User.objects.all()
     serializer_class = UserSerializer
-    lookup_field = 'username'
+    lookup_field = "username"
     permission_classes = (IsAdmin,)
 
     def perform_create(self, serializer):
         serializer.save(password=make_password(None))
 
     @action(
-        methods=('GET', 'PATCH'),
+        methods=("GET", "PATCH"),
         detail=False,
         permission_classes=(IsAuthenticated,),
     )
     def me(self, request, **kwargs):
         user = request.user
 
-        if request.method == 'GET':
+        if request.method == "GET":
             serializer = self.get_serializer(user)
             return Response(serializer.data, status=HTTP_200_OK)
 
@@ -51,7 +51,7 @@ class UserViewSet(ModelViewSet):
         return Response(serializer.data, status=HTTP_200_OK)
 
 
-@api_view(['POST'])
+@api_view(["POST"])
 @permission_classes([AllowAny])
 def user_create_with_email(request):
     serializer = UserCreateWithEmailSerializer(data=request.data)
@@ -59,13 +59,12 @@ def user_create_with_email(request):
 
     try:
         user, created = User.objects.get_or_create(
-            email=serializer.data['email'],
-            username=serializer.data['username'],
+            email=serializer.data["email"],
+            username=serializer.data["username"],
         )
     except (IntegrityError, User.DoesNotExist):
         raise ValidationError(
-            'Unable to get or create user '
-            'with given attributes.'
+            "Unable to get or create user " "with given attributes."
         )
 
     if created:
@@ -74,11 +73,11 @@ def user_create_with_email(request):
 
     confirmation_code = default_token_generator.make_token(user)
     send_mail(
-        'YaMDb: get your confirmation code!',
+        "YaMDb: get your confirmation code!",
         (
-            f'Hi, {user.username}! Use the code below '
-            'to get access token: \n'
-            f'{confirmation_code}'
+            f"Hi, {user.username}! Use the code below "
+            "to get access token: \n"
+            f"{confirmation_code}"
         ),
         None,
         (user.email,),
@@ -86,7 +85,7 @@ def user_create_with_email(request):
     return Response(serializer.data)
 
 
-@api_view(['POST'])
+@api_view(["POST"])
 @permission_classes([AllowAny])
 def access_token_obtain(request):
     serializer = AccessTokenObtainSerializer(data=request.data)
@@ -94,19 +93,17 @@ def access_token_obtain(request):
 
     user = get_object_or_404(
         User,
-        email=serializer.data['email'],
+        email=serializer.data["email"],
     )
 
     if not default_token_generator.check_token(
         user,
-        serializer.data['confirmation_code'],
+        serializer.data["confirmation_code"],
     ):
-        raise AuthenticationFailed(
-            'Confirmation code is invalid.'
-        )
+        raise AuthenticationFailed("Confirmation code is invalid.")
 
     access = AccessToken.for_user(user)
     data = {
-        'token': str(access),
+        "token": str(access),
     }
     return Response(data)

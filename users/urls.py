@@ -5,22 +5,22 @@ from rest_framework.routers import DefaultRouter
 from .views import UserViewSet, access_token_obtain, user_create_with_email
 
 router_v1 = DefaultRouter()
-router_v1.register('users', UserViewSet, basename='user')
+router_v1.register("users", UserViewSet, basename="user")
 
 auth_patterns = [
     path(
-        'email/',
+        "email/",
         user_create_with_email,
-        name='user-create-with-email',
+        name="user-create-with-email",
     ),
     path(
-        'token/',
+        "token/",
         access_token_obtain,
-        name='access-token-obtain',
+        name="access-token-obtain",
     ),
 ]
 
 urlpatterns = [
-    path('v1/', include(router_v1.urls)),
-    path('v1/auth/', include(auth_patterns)),
+    path("v1/", include(router_v1.urls)),
+    path("v1/auth/", include(auth_patterns)),
 ]
