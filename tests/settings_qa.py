@@ -1,9 +1,9 @@
-from api_yamdb.settings import *
+from api_yamdb import settings
 import os
 
 DATABASES = {
     "default": {
         "ENGINE": "django.db.backends.sqlite3",
-        "NAME": os.path.join(BASE_DIR, "db.sqlite3"),
+        "NAME": os.path.join(settings.BASE_DIR, "db.sqlite3"),
     }
 }
