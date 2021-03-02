@@ -1,4 +1,5 @@
 from api_yamdb.settings import *
+import os
 
 DATABASES = {
     "default": {
