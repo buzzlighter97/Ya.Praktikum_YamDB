@@ -19,7 +19,7 @@ services:
       retries: 10
 
   web:
-    build: .
+    image: peacedalubof/yamdb_final_web:latest
     volumes:
       - ./static:/var/www/static/
       - ./media:/var/www/media/
