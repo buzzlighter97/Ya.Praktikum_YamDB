@@ -14,17 +14,21 @@ class TestDockerfile:
         except FileNotFoundError:
             assert False, "Проверьте, что добавили файл Dockerfile"
 
-        assert re.search(
-            r"FROM\s+python:", dockerfile
-        ), "Проверьте, что добавили инструкцию FROM" \
-           " с указанием образа python в файл Dockerfile"
+        assert re.search(r"FROM\s+python:", dockerfile), (
+            "Проверьте, что добавили инструкцию FROM"
+            " с указанием образа python в файл Dockerfile"
+        )
         assert re.search(
             r"((RUN)|(&&))\s+pip(3|)\s+install\s+-r.+requirements\.txt",
             dockerfile,
-        ), "Проверьте, что добавили инструкцию RUN" \
-           " с установкой зависимостей из файла" \
-           " requirements.txt в файл Dockerfile"
+        ), (
+            "Проверьте, что добавили инструкцию RUN"
+            " с установкой зависимостей из файла"
+            " requirements.txt в файл Dockerfile"
+        )
         assert re.search(
             r"CMD\s+gunicorn\s+api_yamdb\.wsgi:application", dockerfile
-        ), "Проверьте, что добавили инструкцию CMD" \
-           " с запуском gunicorn в файл Dockerfile"
+        ), (
+            "Проверьте, что добавили инструкцию CMD"
+            " с запуском gunicorn в файл Dockerfile"
+        )
