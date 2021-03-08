@@ -59,7 +59,7 @@ jobs:
          script: |
            sudo docker pull peacedalubof/yamdb_final_web
            sudo docker container prune --force
-           sudo docker run --rm -d -p 8000:8000 peacedalubof/yamdb_final_web
+           sudo docker-compose up
            
   send_message:
     runs-on: ubuntu-latest
