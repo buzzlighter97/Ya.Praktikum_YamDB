@@ -107,7 +107,7 @@ USE_TZ = True
 STATIC_URL = "/static/"
 STATIC_ROOT = os.path.join(
     BASE_DIR, "static/"
-)  # Это папка, в которой будет лежать статика
+)  # папка, в которой будет лежать статика
 
 AUTH_USER_MODEL = "users.User"
 
