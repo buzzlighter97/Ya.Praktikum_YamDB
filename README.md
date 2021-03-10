@@ -1,7 +1,5 @@
 [![yamdb_workflow](https://github.com/buzzlighter97/yamdb_final/workflows/yamdb_workflow/badge.svg)](https://github.com/buzzlighter97/yamdb_final/actions/workflows/yamdb_workflow)
 
-Click the badge to check workflow.
-
 # YAmdb API
 
 This API allows you to surf a database of different titles of different genres. Also you can add titles, rate them and comment other peoples' reviews.
