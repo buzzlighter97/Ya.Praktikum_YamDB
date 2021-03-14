@@ -1,6 +1,7 @@
 ![yamdb_workflow](https://github.com/buzzlighter97/yamdb_final/workflows/yamdb_workflow/badge.svg)
 
 http://130.193.42.68/admin/
+http://130.193.42.68/redoc/
 
 # YAmdb API
 
