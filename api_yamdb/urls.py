@@ -8,7 +8,7 @@ urlpatterns = [
     path("api/", include("api.urls")),
     path(
         "redoc/",
-        TemplateView.as_view(template_name="../static/../templates/../static/redoc.html"),
+        TemplateView.as_view(template_name="../static/../templates/../static/../templates/redoc.html"),
         name="redoc",
     ),
 ]
